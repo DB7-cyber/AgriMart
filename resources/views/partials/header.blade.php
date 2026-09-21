@@ -4,13 +4,13 @@
         <nav class="main-nav">
             <ul>
                 <li><a href="{{ route('home') }}">Home</a></li>
-                <li><a href="#">Products</a></li>
-                <li><a href="#">Categories</a></li>
+                <li><a href="{{ route('products.index') }}">Products</a></li>
+                <li><a href="{{ route('categories.index') }}">Categories</a></li>
                 <li><a href="#">About</a></li>
             </ul>
         </nav>
-        <form class="search-bar" action="#" method="GET">
-            <input type="text" name="q" placeholder="Search products...">
+        <form class="search-bar" action="{{ route('products.index') }}" method="GET">
+            <input type="text" name="q" value="{{ request('q') }}" placeholder="Search products...">
             <button type="submit">Search</button>
         </form>
         <div class="header-actions">

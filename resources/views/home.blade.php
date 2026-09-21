@@ -7,30 +7,31 @@
         <div class="hero-text">
             <h1>Fresh From the Farm, Straight to You</h1>
             <p>Buy quality produce directly from local farmers and vendors.</p>
-            <a href="#" class="btn-primary">Shop Now</a>
+            <a href="{{ route('products.index') }}" class="btn-primary">Shop Now</a>
         </div>
     </section>
+
+    @include('partials.flash')
 
     <section class="featured-categories">
         <h2>Shop by Category</h2>
         <div class="category-grid">
-            <div class="category-card">Vegetables</div>
-            <div class="category-card">Fruits</div>
-            <div class="category-card">Grains</div>
-            <div class="category-card">Livestock Products</div>
+            @forelse ($categories as $category)
+                <a href="{{ route('categories.show', $category) }}" class="category-card">{{ $category->name }}</a>
+            @empty
+                <p>No categories yet. <a href="{{ route('categories.create') }}">Add one</a>.</p>
+            @endforelse
         </div>
     </section>
 
     <section class="featured-products">
         <h2>Featured Products</h2>
         <div class="product-grid">
-            @for ($product = 1; $product <= 4; $product++)
-                <div class="product-card">
-                    <div class="product-image-placeholder"></div>
-                    <p class="product-name">Sample Product {{ $product }}</p>
-                    <p class="product-price">K00.00</p>
-                </div>
-            @endfor
+            @forelse ($featuredProducts as $product)
+                @include('partials.product-card', ['product' => $product])
+            @empty
+                <p>No featured products yet. <a href="{{ route('products.create') }}">Add a product</a>.</p>
+            @endforelse
         </div>
     </section>
 @endsection

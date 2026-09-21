@@ -8,7 +8,7 @@
             <h4>Quick Links</h4>
             <ul>
                 <li><a href="{{ route('home') }}">Home</a></li>
-                <li><a href="#">Products</a></li>
+                <li><a href="{{ route('products.index') }}">Products</a></li>
                 <li><a href="#">Contact Us</a></li>
             </ul>
         </div>
