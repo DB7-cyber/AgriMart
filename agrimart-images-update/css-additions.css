@@ -1,0 +1,24 @@
+
+/* ============================================================
+   PRODUCT IMAGES (added for the image upload feature)
+   ============================================================ */
+.product-image {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    background: #f0f0f0;
+    display: block;
+}
+
+.product-image-large {
+    width: 100%;
+    max-width: 360px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    background: #f0f0f0;
+    display: block;
+}

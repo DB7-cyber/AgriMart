@@ -1,0 +1,49 @@
+IMAGE FEATURE — WHERE TO PASTE EACH FILE
+==========================================
+
+REPLACE these existing files entirely with the versions in this zip:
+  app/Http/Controllers/ProductController.php
+  app/Models/Product.php
+  resources/views/partials/product-card.blade.php
+  resources/views/products/show.blade.php
+  resources/views/products/create.blade.php
+
+ADD these new files (they don't exist yet):
+  public/images/categories/vegetables.svg
+  public/images/categories/fruits.svg
+  public/images/categories/grains.svg
+  public/images/categories/livestock-products.svg
+  public/images/categories/default.svg
+
+APPEND this to the END of your resources/css/app.css AND public/css/app.css
+(both copies, same as before):
+  css-additions.css   <-- copy its contents to the bottom of both app.css files
+
+ONE-TIME SETUP COMMAND (required for uploaded photos to actually display):
+  php artisan storage:link
+
+This creates a symlink from public/storage -> storage/app/public, which is
+how Laravel safely serves uploaded files. Without this command, any photo
+you upload will save correctly but show as a broken image link.
+
+WHAT CHANGED, IN PLAIN TERMS:
+- ProductController@store now accepts an optional uploaded image file,
+  validates it (must be a real image, max 2MB), and saves it.
+- Product.php has a new image_url accessor: if a product has a real
+  uploaded photo, it returns that; otherwise it returns a simple
+  category icon (vegetables/fruits/grains/livestock) so nothing ever
+  shows a broken image.
+- product-card.blade.php and products/show.blade.php now use
+  $product->image_url instead of the old gray placeholder div.
+- products/create.blade.php has a new file input, and the <form> tag
+  now has enctype="multipart/form-data" — REQUIRED for file uploads
+  to work at all; without it the file silently never uploads.
+
+AFTER PASTING, RUN:
+  php artisan storage:link
+  php artisan serve
+
+Then test it: go to /products/create, fill the form, optionally upload
+a real photo, and save. Existing seeded products (Tomatoes, Bananas,
+etc.) will automatically show their category icon since they have no
+uploaded image — no reseeding needed.

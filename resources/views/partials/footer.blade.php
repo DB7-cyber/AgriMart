@@ -14,8 +14,8 @@
         </div>
         <div class="footer-col">
             <h4>Contact</h4>
-            <p>Email: support@agrimart.example</p>
-            <p>Phone: +260 000 000 000</p>
+            <p>Email: agrimart@gmail.com</p>
+            <p>Phone: 0966201725</p>
         </div>
     </div>
     <div class="footer-bottom">

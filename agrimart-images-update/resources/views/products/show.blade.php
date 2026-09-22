@@ -13,9 +13,6 @@
         <p class="product-price">K{{ number_format($product->price, 2) }} / {{ $product->unit }}</p>
         <p>{{ $product->stock > 0 ? $product->stock.' '.$product->unit.' in stock' : 'Out of stock' }}</p>
         <p>{{ $product->description }}</p>
-        <div class="product-actions">
-            <a href="{{ route('products.edit', $product) }}" class="btn-primary">Edit Product</a>
-            <button class="btn-primary" @disabled($product->stock < 1)>Add to Cart</button>
-        </div>
+        <button class="btn-primary" @disabled($product->stock < 1)>Add to Cart</button>
     </section>
 @endsection

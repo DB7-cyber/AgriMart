@@ -62,44 +62,6 @@ class ProductController extends Controller
             ->with('success', 'Product added successfully.');
     }
 
-    public function edit(Product $product)
-    {
-        return view('products.edit', [
-            'product' => $product->load('category'),
-            'categories' => Category::orderBy('name')->get(),
-        ]);
-    }
-
-    public function update(Request $request, Product $product)
-    {
-        $data = $request->validate([
-            'category_id' => ['required', 'exists:categories,id'],
-            'name' => ['required', 'string', 'max:255'],
-            'description' => ['nullable', 'string', 'max:5000'],
-            'price' => ['required', 'numeric', 'min:0', 'max:99999999.99'],
-            'stock' => ['required', 'integer', 'min:0'],
-            'unit' => ['required', 'string', 'max:50'],
-            'is_featured' => ['nullable', 'boolean'],
-            'image' => ['nullable', 'image', 'max:2048'],
-        ]);
-
-        $data['is_featured'] = $request->boolean('is_featured');
-
-        if ($request->hasFile('image')) {
-            if ($product->image) {
-                \Illuminate\Support\Facades\Storage::disk('public')->delete($product->image);
-            }
-
-            $data['image'] = $request->file('image')->store('products', 'public');
-        }
-
-        $product->update($data);
-
-        return redirect()
-            ->route('products.show', $product)
-            ->with('success', 'Product updated successfully.');
-    }
-
     public function show(Product $product)
     {
         return view('products.show', [
